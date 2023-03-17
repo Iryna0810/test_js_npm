@@ -17,6 +17,10 @@ height: 100px;
 font-size: larger;
 }
 
+/* .btn {
+
+} */
+
 .is-visible {
     opacity: 1;
     visibility: visible;
