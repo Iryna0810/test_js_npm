@@ -1,4 +1,4 @@
-import BSN from '_bootstrap.native';
+import { BSN } from "bootstrap.native";
 
 const modal = new BSN.modal('#subscribition-modal');
 
