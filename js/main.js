@@ -27,20 +27,29 @@ setTimeout(() => {
 
 console.log(`після виклику setTimeout`);
 
+const NOTIFICATION_DELAY = 3000;
+let timeoutId = null;
 const refs = {
-    notification: document.querySelector('.js-alert'),
-
+    notification: document.querySelector('.class'),
 };
 
-refs.notification.addEventListener('click', onNotificationClick);
+
+refs.notification.addEventListener("click", onNotificationClick);
 
 showNotification();
     
 function onNotificationClick() {
     hideNotificationClick();
+    clearTimeout(timeoutId);
 }
+
 function showNotification () {
     refs.notification.classList.add("is-visible");
+ 
+    timeoutId = setTimeout(() => {
+        console.log('need close alert');
+           hideNotificationClick();
+    }, NOTIFICATION_DELAY);
 }
 
 function hideNotificationClick() {
