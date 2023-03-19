@@ -37,3 +37,32 @@ console.log("getUTCMonth(): ", date.getUTCMonth());
 
 
 console.log(date.toTimeString());
+
+console.log('First');
+setTimeout( 
+    function () {
+        console.log('inner SetTimeout 1000')
+    }, 1000
+)
+console.log('Second');
+
+setTimeout( 
+    function () {
+        console.log('inner SetTimeout 3000')
+    }, 3000
+)
+
+console.log('Third');
+let seconds = 1;
+const stopId = setInterval(() => {
+    console.log(seconds);
+    seconds+=1
+}, 1000);
+
+document.addEventListener('click', () => {
+    clearInterval(stopId);
+});
+
+console.dir(date);
+
+// clearInterval(stopId, 10000)
