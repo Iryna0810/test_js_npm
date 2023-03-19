@@ -1,9 +1,14 @@
+body {
+    margin: 16px;
+    text-align: center;
+}
 .class {
     background-color: #cabccb;
     display: flex;
     justify-content: center;
     font-size: 50px;
-    display: block;
+    display: inline-flex;
+    
     opacity: 0;
     visibility: hidden;
     /* pointer-events: none; */
@@ -11,10 +16,14 @@
 }
 
 .button {
-background-color: green;
+background-color: rgb(9, 0, 128);
 width: 200px;
 height: 100px;
 font-size: larger;
+border: 1px solid #fff;
+color: #fff;
+border-radius: 10%;
+display: block;
 }
 
 /* .btn {
