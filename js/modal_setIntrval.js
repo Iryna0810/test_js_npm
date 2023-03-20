@@ -1,8 +1,8 @@
-// import BSN  from "bootstrap.native";
+import BSN  from "bootstrap.native";
 
-// const modal = new BSN.modal('#subscribition-modal');
+const modal = new BSN.modal('#exampleModal');
 
-// console.log(modal);
+console.log(modal);
 
 const startBtn = document.querySelector(".js-start");
 const stopBtn = document.querySelector(".js-stop");
@@ -64,5 +64,28 @@ document.addEventListener('click', () => {
 });
 
 console.dir(date);
+
+const weekDays = ['НД', "ПН", "ВТ", "СР", "чт", "ПТ", "СБ"];
+const getWeekDays = data => {
+    const weekDayIndex = data.getDay();
+    return weekDays[weekDayIndex];
+}
+
+const data = new Date();
+console.log(getWeekDays(data));
+
+const getLastDayOfMonth = (year, month) => {
+    const date = new Date(year, month + 1, 0);
+    
+    return date.getDate();
+};
+
+console.dir(getLastDayOfMonth(2012, 1));
+
+
+
+
+
+
 
 // clearInterval(stopId, 10000)
