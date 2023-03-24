@@ -135,4 +135,80 @@ const makePromise = () => {
 makePromise()
     .then(result => console.log(result))
     .catch(error => console.log(error));
+
+const horses = [
+        'Secretariat',
+    'Eclipse',
+    'West Australian',
+    'Flying Fox',
+    'Mango',
+]
+
+const refs = {
+    startBtn: document.querySelector('.js-start-race'),
+    winnerField: document.querySelector('.js-winner'),
+    progressField: document.querySelector('.js-progress'),
+    tableBody: document.querySelector('.js-resule-table'),
+ }   
+
+refs.startBtn.addEventListener('click', () => {
+    const promises = horses.map(run);
+
+    updateWinnerField(``);
+            
+    updateProgressFild('the Race is starting');
     
+    Promise.race(promises).then(({ horse, time }) => {
+        updateWinnerField (`win ${horse} finish time ${time}`);
+    });
+
+    Promise.all(promises).then(() => {
+        refs.progressField.textContent = 'Race is finished';
+});
+
+});
+
+function updateWinnerField(message) {
+    refs.winnerField.textContent = message;
+}
+
+function updateProgressFild(message) {
+    refs.progressField.textContent = message;
+}
+
+function run(horse) {
+    return new Promise(resolve => {
+        const time = getRandomTime(2000, 3500)
+        setTimeout(() => {
+            resolve({ horse, time });
+        }, time);
+
+    });
+
+}
+
+console.log('run started');
+
+const promises = horses.map(run);
+console.log(promises);
+
+// Promise.race(promises).then(({ horse, time }) => {
+//     console.log(
+//         `win ${horse} finish time ${time}`
+//     );
+// })
+
+// Promise.all(promises).then(x => {
+//     console.log(x);
+// });
+
+
+
+run('Mango')
+    .then(x => console.log(x))
+    .catch(e => console.log(e));
+
+
+function getRandomTime(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
