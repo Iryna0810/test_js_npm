@@ -151,22 +151,32 @@ const refs = {
     tableBody: document.querySelector('.js-resule-table'),
  }   
 
-refs.startBtn.addEventListener('click', () => {
-    const promises = horses.map(run);
+refs.startBtn.addEventListener('click', start);
+
+function start() {
+     const promises = horses.map(run);
 
     updateWinnerField(``);
             
     updateProgressFild('the Race is starting');
-    
-    Promise.race(promises).then(({ horse, time }) => {
-        updateWinnerField (`win ${horse} finish time ${time}`);
-    });
 
-    Promise.all(promises).then(() => {
+    determineWinner(promises);
+
+    waitForAll(promises);      
+}
+
+function waitForAll (horsesP) {
+    Promise.all(horsesP).then(() => {
         refs.progressField.textContent = 'Race is finished';
 });
+}
 
-});
+function determineWinner(horsesP) {
+    Promise.race(horsesP).then(({ horse, time }) => {
+        updateWinnerField(`win ${horse} finish time ${time}`);
+        updateResuleTable({ horse, time });
+    });
+}
 
 function updateWinnerField(message) {
     refs.winnerField.textContent = message;
@@ -174,6 +184,12 @@ function updateWinnerField(message) {
 
 function updateProgressFild(message) {
     refs.progressField.textContent = message;
+}
+
+function updateResuleTable({ horse, time }) {
+    const tr = `<tr><td>0</td><td>${horse}</td><td>${time}</td></tr>`;
+    refs.tableBody.insertAdjacentHTML('beforeend', tr);
+
 }
 
 function run(horse) {
