@@ -137,7 +137,7 @@ makePromise()
     .catch(error => console.log(error));
 
 const horses = [
-        'Secretariat',
+    'Secretariat',
     'Eclipse',
     'West Australian',
     'Flying Fox',
