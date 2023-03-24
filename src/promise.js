@@ -97,3 +97,42 @@ function onMakeOrderError(error) {
     console.log('onMakeOrderError');
     console.log(error);
 }
+
+const fetchPokemonByld = id => {
+    return fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(r => r.json());
+};
+
+// fetchPokemonByld(1).then(onFetchSuccess).catch(onFetchError);
+// fetchPokemonByld(10).then(onFetchSuccess).catch(onFetchError);
+// fetchPokemonByld(20).then(onFetchSuccess).catch(onFetchError);
+
+
+function onFetchSuccess(pokemon) {
+    console.log('onFetchSuccess -> onFetchSuccess');
+    console.log(pokemon);
+}
+
+function onFetchError(error) {
+    console.log('onFetchError -> onFetchError');
+    console.log('its in block catch');
+    console.log('error')
+}
+
+const makePromise = () => {
+    return new Promise((resolve, reject) => {
+        const passed = Math.random() > 0.5;
+
+        setTimeout(() => {
+            if (passed) {
+                resolve('this is resolve');
+            }
+
+            reject('this is reject')
+        }, 2000);
+    })
+};
+
+makePromise()
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
+    
