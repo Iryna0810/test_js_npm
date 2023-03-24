@@ -72,13 +72,21 @@ const makeOrder = dish => {
        
 };
 
+const makeOrderNew = dish => {
+    return Promise.resolve(`here your ${dish}`);
+};
+
+makeOrderNew('cake').then(onMakeOrderSuccsess);
+
+
+
 
     
 // const p = makeOrder('cake');
 
 // p.then(onMakeOrderSuccsess).catch(onMakeOrderError);
 
-makeOrder('cake').then(onMakeOrderSuccsess).catch(onMakeOrderError);
+// makeOrder('cake').then(onMakeOrderSuccsess).catch(onMakeOrderError);
  
 function onMakeOrderSuccsess(result) {
     console.log('onMakeOrderSuccsess');
