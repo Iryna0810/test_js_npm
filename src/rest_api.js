@@ -26,13 +26,18 @@ function handleSearch(event) {
         .finally(() => form.reset());
 }
 
-function handleFetchError() {
-        return Notiflix.Notify.failure("error");
+function handleFetchError(error) {
+    console.warn(error);
+    return Notiflix.Notify.failure("error");
+    
     }
 
 function fetchPokemonByld(pokemonId) {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then((response) => {
     // console.log(response.json());
+        if (!response.ok) {
+            throw new Error(response.status)
+        }
     return response.json();
 })
 }
