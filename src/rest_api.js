@@ -1,39 +1,34 @@
 import { Button } from 'bootstrap.native';
 import Notiflix from 'notiflix';
 // import pokemonCardTpl from "./exsample_pokemon.hbs"
+import getRefs from '../get-refs';
 
-const refs = {
-    markup: document.querySelector('.js-card-create'),
-    searchForm: document.querySelector('.form-control'),
-    searchInput: document.querySelector ('.form-control-input')
-    }
+const refs = getRefs();
 console.log(refs.searchForm);
+
 refs.searchForm.addEventListener('submit', handleSearch);
     // const searchQuerry = refs.searchInput.value;
     // console.log(searchQuerry);
 
 function handleSearch(event) {
-    event.prevantDefault();
+    event.preventDefault();
 
-    // const form = event.currentTarget ;
-    // console.log(form.elements);
-    const searchQuerry = refs.searchInput.value;
-    console.log(searchQuerry);
+    const form = event.currentTarget ;
+    console.log(form.elements);
+    const searchQuery = form.elements.query.value;
+    // const searchQuerry = refs.searchInput.value;
+    console.log(searchQuery);
 
 
-    fetchPokemonByld(searchQuerry)
-    .then(renderPokemonCard)
-    .catch(error => {
-        return Notiflix.Notify.failure("error");
-    });
+    fetchPokemonByld(searchQuery)
+        .then(renderPokemonCard)
+        .catch(handleFetchError)
+        .finally(() => form.reset());
 }
 
-
-
-
-
-
-
+function handleFetchError() {
+        return Notiflix.Notify.failure("error");
+    }
 
 function fetchPokemonByld(pokemonId) {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then((response) => {
@@ -70,3 +65,22 @@ function renderPokemonCard(pokemon) {
 
     }
 
+
+fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
+    .then(r => r.json())
+    .then(console.log)
+
+fetch('https://pixabay.com/api/?key=34769662-caad36a1f3170139f3332b200&q=dogs&image_type=photo')    
+    .then(r => r.json())
+    .then(console.log)
+
+const url = 'https://newsapi.org/v2/everything?q=bitcoin';
+const options = {
+    headers: {
+        Authorization:'567231439280463c8671c619b60356ac',
+},
+};
+
+fetch(url, options)
+        .then(r => r.json())
+    .then(console.log)
