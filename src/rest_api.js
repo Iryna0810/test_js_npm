@@ -29,8 +29,7 @@ function handleSearch(event) {
 function handleFetchError(error) {
     console.warn(error);
     return Notiflix.Notify.failure("error");
-    
-    }
+        }
 
 function fetchPokemonByld(pokemonId) {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then((response) => {
