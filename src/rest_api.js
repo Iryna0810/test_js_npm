@@ -37,7 +37,7 @@ function fetchPokemonByld(pokemonId) {
         if (!response.ok) {
             throw new Error(response.status)
         }
-    return response.json();
+        return response.json();
 })
 }
 
